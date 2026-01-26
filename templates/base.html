@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Responsive layout (accessibility + mobile) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Community Tourism{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="visually-hidden-focusable">
+        Skip to main content
+    </a>
+
+    <header class="container my-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">Community Tourist Assistant</h1>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav align-items-center gap-3">
+                    <!-- Main navigation (left) -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'places:search_places' %}">Search</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                        <!-- Primary action -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'places:add_place' %}">
+                                Add Place
+                            </a>
+                        </li>
+                        <!-- User menu (right) -->
+                        <li class="nav-item dropdown">
+                            <button
+                                class="btn btn-outline-secondary dropdown-toggle"
+                                id="userMenu"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                <span class="visually-hidden">User menu</span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                                        My Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'places:add_place' %}">
+                                        Add Place
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'accounts:logout' %}">
+                                        Log out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Auth links when logged out -->
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{% url 'accounts:login' %}">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{% url 'accounts:signup' %}">
+                                Sign up
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Messages -->
+    {% block messages %}
+        {% if messages %}
+            <div class="container" aria-live="polite" aria-atomic="true">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.level_tag }}" {% if message.level_tag == 'error' %}role="alert"{% else %}role="status"{% endif %}>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    <main id="main-content" class="container my-4" tabindex="-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container mt-5 mb-3">
+        <div class="d-flex flex-wrap gap-3 align-items-center">
+            <p class="mb-0">&copy; 2026 Community Tourism App</p>
+            <a href="{% url 'contribution_guidelines' %}">Contribution Guidelines</a>
+            <a href="{% url 'moderation_policy' %}">Moderation Policy</a>
+            <a href="{% url 'acceptable_use_policy' %}">Acceptable Use</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (required for dropdown) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
+</body>
+</html>
