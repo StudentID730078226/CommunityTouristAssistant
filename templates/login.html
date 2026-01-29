@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<section class="auth-wrapper" aria-labelledby="login-form-heading">
+  <div class="row g-4 align-items-stretch">
+    <div class="col-12 col-lg-6">
+      <div class="card auth-card shadow-sm h-100">
+        <div class="card-body p-4 p-md-5">
+          <h2 id="login-form-heading" class="mb-2">Welcome back</h2>
+          <p class="text-muted mb-4">Sign in to manage your places and reviews.</p>
+
+          {% if form_errors.non_field %}
+            <div id="login-form-error" class="alert alert-danger" role="alert">
+              {{ form_errors.non_field }}
+            </div>
+          {% endif %}
+
+          <form method="post" aria-labelledby="login-form-heading" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="id_username" class="form-label">Username</label>
+              <input
+                type="text"
+                id="id_username"
+                name="username"
+                class="form-control {% if form_errors.non_field %}is-invalid{% endif %}"
+                required
+                aria-required="true"
+                autocomplete="username"
+                placeholder="Enter your username"
+                value="{{ form_data.username }}"
+                {% if form_errors.non_field %}aria-invalid="true" aria-describedby="login-form-error"{% endif %}
+              >
+            </div>
+
+            <div class="mb-3">
+              <label for="id_password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="id_password"
+                name="password"
+                class="form-control {% if form_errors.non_field %}is-invalid{% endif %}"
+                required
+                aria-required="true"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                {% if form_errors.non_field %}aria-invalid="true" aria-describedby="login-form-error"{% endif %}
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+          </form>
+
+          <div class="auth-meta mt-4">
+            <p class="mb-2">
+              Do not have an account?
+              <a href="{% url 'accounts:signup' %}">Create one</a>
+            </p>
+            <p class="mb-0">
+              Forgot your password?
+              <a href="{% url 'accounts:password_reset' %}">Reset it by email</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <aside class="auth-aside h-100 p-4 p-md-5" aria-label="Sign in benefits">
+        <h3 class="h5 mb-3">Your community toolkit</h3>
+        <ul class="auth-list">
+          <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Save places you love</li>
+          <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Track your contributions</li>
+          <li><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Get faster access to review tools</li>
+        </ul>
+        <div class="auth-callout mt-4">
+          <p class="mb-2 fw-semibold">New to the platform?</p>
+          <p class="mb-3 text-muted">Create an account and start sharing local gems.</p>
+          <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">
+            Create account
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
