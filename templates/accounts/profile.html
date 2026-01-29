@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load profile_tags %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h2 class="h4 mb-3">Your Profile</h2>
+                <p class="mb-1"><strong>Username:</strong> {{ user.username }} {% user_badge user %}</p>
+                <p class="mb-0"><strong>Email:</strong> {{ user.email }}</p>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-body">
+                <h3 class="h5 mb-3">Contribution Progress</h3>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted">Current level</span>
+                    <span class="fw-semibold">{{ contribution.level_name }}</span>
+                </div>
+                <div class="progress mb-2" role="progressbar" aria-label="Contribution progress" aria-valuenow="{{ contribution.level_progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: {{ contribution.level_progress_percent }}%"></div>
+                </div>
+                {% if contribution.next_level_name %}
+                    <small class="text-muted">{{ contribution.points_to_next_level }} points to reach {{ contribution.next_level_name }}.</small>
+                {% else %}
+                    <small class="text-success">Top level achieved. Amazing work!</small>
+                {% endif %}
+
+                <div class="row g-3 mt-2">
+                    <div class="col-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Places added</div>
+                            <div class="stat-value">{{ contribution.places_added }}</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Reviews added</div>
+                            <div class="stat-value">{{ contribution.reviews_added }}</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="stat-box">
+                            <div class="stat-label">Points</div>
+                            <div class="stat-value">{{ contribution.points }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-body">
+                <h3 class="h5 mb-3">Your Submitted Places</h3>
+                <div class="row g-2 mb-3">
+                    <div class="col-md-4">
+                        <span class="badge text-bg-secondary w-100 py-2">Pending: {{ pending_places.count }}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="badge text-bg-success w-100 py-2">Approved: {{ approved_places.count }}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="badge text-bg-danger w-100 py-2">Rejected: {{ rejected_places.count }}</span>
+                    </div>
+                </div>
+
+                {% if submitted_places %}
+                    <div class="list-group">
+                        {% for place in submitted_places %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-semibold">
+                                        {% if place.moderation_status == "approved" %}
+                                            <a href="{% url 'places:place_detail' place.pk %}">{{ place.name }}</a>
+                                        {% else %}
+                                            {{ place.name }}
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">{{ place.get_category_display }} - {{ place.created_at|date:"M d, Y" }}</small>
+                                </div>
+                                {% if place.moderation_status == "approved" %}
+                                    <span class="badge text-bg-success">Approved</span>
+                                {% elif place.moderation_status == "rejected" %}
+                                    <span class="badge text-bg-danger">Rejected</span>
+                                {% else %}
+                                    <span class="badge text-bg-secondary">Pending</span>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">You have not submitted any places yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-body">
+                <h3 class="h5 mb-3">Places You've Liked</h3>
+
+                {% if liked_places %}
+                    <div class="row g-3">
+                        {% for place in liked_places %}
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <h4 class="h6 mb-1">
+                                            <a href="{% url 'places:place_detail' place.pk %}">{{ place.name }}</a>
+                                        </h4>
+                                        <p class="text-muted mb-1">{{ place.get_category_display }}</p>
+                                        {% if place.average_rating %}
+                                            <p class="mb-0">&#9733; {{ place.average_rating }}</p>
+                                        {% else %}
+                                            <p class="mb-0 text-muted">No ratings yet</p>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if place.images.all %}
+                                        <div class="place-card-images">
+                                            {% for image in place.images.all|slice:":3" %}
+                                                <img src="{{ image.image.url }}" alt="Photo of {{ place.name }}">
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">You have not liked any places yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h3 class="h5 mb-3">Ways to Contribute</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        Add a new place
+                        <span class="badge text-bg-primary">+20 pts</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        Add a review
+                        <span class="badge text-bg-primary">+10 pts</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        Get a place approved
+                        <span class="badge text-bg-primary">+50 pts</span>
+                    </li>
+                </ul>
+                <div class="d-grid gap-2 mt-3">
+                    <a href="{% url 'places:add_place' %}" class="btn btn-outline-primary">Add Place</a>
+                    <a href="{% url 'places:search_places' %}" class="btn btn-outline-secondary">Browse Places</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-danger-subtle mt-3">
+            <div class="card-body">
+                <a href="{% url 'accounts:logout' %}" class="btn btn-outline-dark w-100 mb-2">Log out</a>
+                <a href="{% url 'accounts:delete_account' %}" class="btn btn-outline-danger w-100">Delete account</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

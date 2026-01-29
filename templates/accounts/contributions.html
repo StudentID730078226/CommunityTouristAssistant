@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Your Contributions{% endblock %}
+
+{% block content %}
+<h2>Your Contributions</h2>
+<p>Places added: {{ contribution.places_added }}</p>
+<p>Reviews added: {{ contribution.reviews_added }}</p>
+<p>Points: {{ contribution.points }}</p>
+{% endblock %}
