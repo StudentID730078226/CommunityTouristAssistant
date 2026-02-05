@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section aria-labelledby="search-heading" class="mb-4">
+    <h2 id="search-heading" class="mb-2">Find Places</h2>
+    <p class="text-muted mb-4">Use filters to discover places by rating, popularity, and practical visitor details.</p>
+
+    <form method="get" role="search" class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <label for="search-q" class="form-label">Search</label>
+                    <input id="search-q" type="text" name="q" class="form-control" value="{{ q }}" placeholder="Name, town, postcode, keywords">
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <label for="search-category" class="form-label">Category</label>
+                    <select id="search-category" name="category" class="form-select">
+                        <option value="">All</option>
+                        {% for value, label in categories %}
+                            <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <label for="search-rating" class="form-label">Min rating</label>
+                    <select id="search-rating" name="min_rating" class="form-select">
+                        <option value="">Any</option>
+                        <option value="5" {% if selected_min_rating == "5" %}selected{% endif %}>5+</option>
+                        <option value="4" {% if selected_min_rating == "4" %}selected{% endif %}>4+</option>
+                        <option value="3" {% if selected_min_rating == "3" %}selected{% endif %}>3+</option>
+                        <option value="2" {% if selected_min_rating == "2" %}selected{% endif %}>2+</option>
+                        <option value="1" {% if selected_min_rating == "1" %}selected{% endif %}>1+</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <label for="search-sort" class="form-label">Sort by</label>
+                    <select id="search-sort" name="sort" class="form-select">
+                        <option value="top_rated" {% if selected_sort == "top_rated" %}selected{% endif %}>Top rated</option>
+                        <option value="most_liked" {% if selected_sort == "most_liked" %}selected{% endif %}>Most liked</option>
+                        <option value="newest" {% if selected_sort == "newest" %}selected{% endif %}>Newest</option>
+                        <option value="name_az" {% if selected_sort == "name_az" %}selected{% endif %}>Name A-Z</option>
+                        <option value="rating_low_high" {% if selected_sort == "rating_low_high" %}selected{% endif %}>Rating low-high</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <label for="search-per-page" class="form-label">Results</label>
+                    <select id="search-per-page" name="per_page" class="form-select">
+                        {% for n in per_page_options %}
+                            <option value="{{ n }}" {% if n == selected_per_page %}selected{% endif %}>{{ n }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="has-images" name="has_images" value="1" {% if selected_has_images %}checked{% endif %}>
+                        <label class="form-check-label" for="has-images">Has photos</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="open-now" name="open_now" value="1" {% if selected_open_now %}checked{% endif %}>
+                        <label class="form-check-label" for="open-now">Open now</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary ms-auto">Apply filters</button>
+                    <a href="{% url 'places:search_places' %}" class="btn btn-outline-secondary">Reset</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<section aria-labelledby="results-heading">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 id="results-heading" class="h4 mb-0">Search results</h2>
+        <span class="text-muted">{{ places.paginator.count }} found</span>
+    </div>
+
+    {% if places %}
+        <div class="row g-3">
+            {% for place in places %}
+                <div class="col-md-6 col-xl-4">
+                    <article class="card h-100 shadow-sm border-0 search-result-card">
+                        <div class="search-result-thumb-wrap">
+                            {% with first_image=place.images.all|first %}
+                                {% if first_image %}
+                                    <img src="{{ first_image.image.url }}" alt="Photo of {{ place.name }}" class="search-result-thumb">
+                                {% else %}
+                                    <div class="search-result-placeholder"><i class="bi bi-image" aria-hidden="true"></i><span>No photo</span></div>
+                                {% endif %}
+                            {% endwith %}
+                            <span class="badge text-bg-light search-result-category">{{ place.get_category_display }}</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="h5 mb-1"><a href="{% url 'places:place_detail' place.id %}" class="stretched-link text-decoration-none">{{ place.name }}</a></h3>
+                            <p class="text-muted mb-2">
+                                {% if place.town_city %}{{ place.town_city }}{% endif %}
+                                {% if place.town_city and place.postcode %} - {% endif %}
+                                {% if place.postcode %}{{ place.postcode }}{% endif %}
+                            </p>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge text-bg-warning-subtle border">&#9733;
+                                    {% if place.reviews_total %}{{ place.avg_rating|floatformat:1 }}{% else %}No ratings{% endif %}
+                                </span>
+                                <span class="badge text-bg-danger-subtle border"><i class="bi bi-heart-fill" aria-hidden="true"></i> {{ place.likes_total }}</span>
+                                {% if place.supports_opening_hours and place.has_opening_hours %}
+                                    {% if place.is_open_now %}
+                                        <span class="badge text-bg-success">Open now</span>
+                                    {% else %}
+                                        <span class="badge text-bg-secondary">Closed</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <p class="small text-muted mb-0">{{ place.description|truncatewords:18 }}</p>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-light border">No places found. Try broadening your filters.</div>
+    {% endif %}
+
+    {% if places.has_other_pages %}
+        <nav class="mt-4" aria-label="Search pagination">
+            <ul class="pagination">
+                {% if places.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ q|urlencode }}&category={{ selected_category|urlencode }}&min_rating={{ selected_min_rating|urlencode }}&sort={{ selected_sort|urlencode }}&per_page={{ selected_per_page }}{% if selected_has_images %}&has_images=1{% endif %}{% if selected_open_now %}&open_now=1{% endif %}&page={{ places.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">Page {{ places.number }} of {{ places.paginator.num_pages }}</span></li>
+                {% if places.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ q|urlencode }}&category={{ selected_category|urlencode }}&min_rating={{ selected_min_rating|urlencode }}&sort={{ selected_sort|urlencode }}&per_page={{ selected_per_page }}{% if selected_has_images %}&has_images=1{% endif %}{% if selected_open_now %}&open_now=1{% endif %}&page={{ places.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</section>
+{% endblock %}
