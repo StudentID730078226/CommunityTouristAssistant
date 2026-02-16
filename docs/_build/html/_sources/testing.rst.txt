@@ -1,0 +1,21 @@
+Testing
+=======
+
+Test Strategy
+-------------
+
+- Unit tests for model methods, validators, and utilities
+- Integration tests for user and moderation flows
+- Admin action tests for moderation controls
+
+Commands
+--------
+
+- Run all tests: ``pytest -q``
+- Coverage: ``pytest --cov=accounts --cov=community_tourism --cov=places --cov=reviews --cov-report=term-missing -q``
+
+Current Status
+--------------
+
+The project includes a high-coverage automated test suite with CI-friendly commands.
+

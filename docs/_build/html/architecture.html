@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Architecture &#8212; Community Tourist Assistant 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Design Patterns and Justifications" href="design_patterns.html" />
+    <link rel="prev" title="Community Tourist Assistant Docs" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The application is split into focused Django apps:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">accounts</span></code>: authentication, profile, contribution scoring</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">places</span></code>: place models, submission/search/detail workflows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reviews</span></code>: review submission/reporting/moderation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">community_tourism</span></code>: project-level routing and home views</p></li>
+</ul>
+</section>
+<section id="layered-structure">
+<h2>Layered Structure<a class="headerlink" href="#layered-structure" title="Link to this heading">¶</a></h2>
+<p>The codebase follows a practical layered approach:</p>
+<ul class="simple">
+<li><p><strong>Presentation layer</strong>: Django templates and view functions</p></li>
+<li><p><strong>Application layer</strong>: view orchestration, forms, moderation rules</p></li>
+<li><p><strong>Domain layer</strong>: models encapsulating key behavior (e.g., opening hours, trust logic)</p></li>
+<li><p><strong>Data layer</strong>: PostgreSQL persistence, indexes, migration-based schema evolution</p></li>
+</ul>
+<p>This separation keeps each area understandable and supports iterative MVP growth.</p>
+</section>
+<section id="data-model-highlights">
+<h2>Data Model Highlights<a class="headerlink" href="#data-model-highlights" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Place</span></code> uses polymorphic inheritance for type-specific fields.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PlaceLike</span></code> is an explicit model for flexible like metadata/analytics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReviewReport</span></code> stores user reports with moderation status.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ModerationLog</span></code> stores an audit trail for admin moderation actions.</p></li>
+</ul>
+</section>
+<section id="key-relationships">
+<h2>Key Relationships<a class="headerlink" href="#key-relationships" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Place</span></code> has many <code class="docutils literal notranslate"><span class="pre">Review</span></code> and <code class="docutils literal notranslate"><span class="pre">PlaceImage</span></code> entries.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Place</span></code> has many <code class="docutils literal notranslate"><span class="pre">PlaceLike</span></code> entries (explicit join model).</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Review</span></code> can have many <code class="docutils literal notranslate"><span class="pre">ReviewReport</span></code> entries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ModerationLog</span></code> references moderated objects generically for a unified audit trail.</p></li>
+</ul>
+</section>
+<section id="why-this-architecture-fits-the-scenario">
+<h2>Why this Architecture Fits the Scenario<a class="headerlink" href="#why-this-architecture-fits-the-scenario" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Supports public browsing and quick read performance (indexed queries).</p></li>
+<li><p>Supports trusted crowd contribution with moderation checkpoints.</p></li>
+<li><p>Supports low-overhead operations via admin actions and bulk moderation.</p></li>
+<li><p>Supports future growth (new place subtypes, analytics, API layer) without redesign.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Community Tourist Assistant</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#layered-structure">Layered Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-model-highlights">Data Model Highlights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-relationships">Key Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-this-architecture-fits-the-scenario">Why this Architecture Fits the Scenario</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns and Justifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usability_personas.html">Usability by User Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moderation.html">Moderation Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Community Tourist Assistant Docs</a></li>
+      <li>Next: <a href="design_patterns.html" title="next chapter">Design Patterns and Justifications</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Community Tourist Assistant Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/architecture.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

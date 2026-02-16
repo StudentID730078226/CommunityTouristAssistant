@@ -1,0 +1,61 @@
+API Reference
+=============
+
+This section is generated from docstrings across the application codebase.
+
+Accounts
+--------
+
+.. automodule:: accounts.models
+   :members:
+   :show-inheritance:
+
+.. automodule:: accounts.views
+   :members:
+   :show-inheritance:
+
+.. automodule:: accounts.signals
+   :members:
+   :show-inheritance:
+
+Places
+------
+
+.. automodule:: places.models
+   :members:
+   :show-inheritance:
+
+.. automodule:: places.forms
+   :members:
+   :show-inheritance:
+
+.. automodule:: places.views
+   :members:
+   :show-inheritance:
+
+.. automodule:: places.utils
+   :members:
+   :show-inheritance:
+
+Reviews
+-------
+
+.. automodule:: reviews.models
+   :members:
+   :show-inheritance:
+
+.. automodule:: reviews.forms
+   :members:
+   :show-inheritance:
+
+.. automodule:: reviews.views
+   :members:
+   :show-inheritance:
+
+.. automodule:: reviews.spam
+   :members:
+   :show-inheritance:
+
+.. automodule:: reviews.moderation
+   :members:
+   :show-inheritance:

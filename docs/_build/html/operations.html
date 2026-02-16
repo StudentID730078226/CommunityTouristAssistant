@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Operations &#8212; Community Tourist Assistant 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment Guide" href="deployment.html" />
+    <link rel="prev" title="Moderation Workflow" href="moderation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="operations">
+<h1>Operations<a class="headerlink" href="#operations" title="Link to this heading">¶</a></h1>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">¶</a></h2>
+<p>Runtime configuration is loaded from environment variables in <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p>
+</section>
+<section id="database">
+<h2>Database<a class="headerlink" href="#database" title="Link to this heading">¶</a></h2>
+<p>Supported backends:</p>
+<ul class="simple">
+<li><p>SQLite (default/dev)</p></li>
+<li><p>PostgreSQL (recommended for production)</p></li>
+</ul>
+</section>
+<section id="deployment-notes">
+<h2>Deployment Notes<a class="headerlink" href="#deployment-notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Keep secrets in environment variables.</p></li>
+<li><p>Ensure media backup strategy is in place.</p></li>
+<li><p>Run migrations on each deployment.</p></li>
+</ul>
+</section>
+<section id="build-documentation">
+<h2>Build Documentation<a class="headerlink" href="#build-documentation" title="Link to this heading">¶</a></h2>
+<p>From repository root:</p>
+<ul class="simple">
+<li><p>HTML: <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">docs/sphinx/source</span> <span class="pre">docs/sphinx/_build/html</span></code></p></li>
+<li><p>PDF (rinoh): <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-b</span> <span class="pre">rinoh</span> <span class="pre">docs/sphinx/source</span> <span class="pre">docs/sphinx/_build/rinoh</span></code></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Community Tourist Assistant</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns and Justifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usability_personas.html">Usability by User Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moderation.html">Moderation Workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#environment">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-notes">Deployment Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-documentation">Build Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="moderation.html" title="previous chapter">Moderation Workflow</a></li>
+      <li>Next: <a href="deployment.html" title="next chapter">Deployment Guide</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Community Tourist Assistant Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/operations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Moderation Workflow &#8212; Community Tourist Assistant 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Operations" href="operations.html" />
+    <link rel="prev" title="Usability by User Type" href="usability_personas.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="moderation-workflow">
+<h1>Moderation Workflow<a class="headerlink" href="#moderation-workflow" title="Link to this heading">¶</a></h1>
+<section id="place-moderation">
+<h2>Place Moderation<a class="headerlink" href="#place-moderation" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Users submit places in pending state.</p></li>
+<li><p>Admin approves/rejects/archives submissions.</p></li>
+<li><p>Actions are recorded in <code class="docutils literal notranslate"><span class="pre">ModerationLog</span></code>.</p></li>
+</ol>
+</section>
+<section id="review-moderation">
+<h2>Review Moderation<a class="headerlink" href="#review-moderation" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Users report reviews.</p></li>
+<li><p>Admin upholds or dismisses reports.</p></li>
+<li><p>Upheld reports can penalize contribution score and restrict posting.</p></li>
+<li><p>Actions are recorded in <code class="docutils literal notranslate"><span class="pre">ModerationLog</span></code>.</p></li>
+</ol>
+</section>
+<section id="soft-delete-strategy">
+<h2>Soft Delete Strategy<a class="headerlink" href="#soft-delete-strategy" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Place</span></code> and <code class="docutils literal notranslate"><span class="pre">Review</span></code> support archive fields.</p></li>
+<li><p>Admin delete paths archive items instead of hard delete.</p></li>
+<li><p>Archived content is excluded from public-facing queries.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Community Tourist Assistant</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns and Justifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usability_personas.html">Usability by User Type</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Moderation Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#place-moderation">Place Moderation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#review-moderation">Review Moderation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soft-delete-strategy">Soft Delete Strategy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usability_personas.html" title="previous chapter">Usability by User Type</a></li>
+      <li>Next: <a href="operations.html" title="next chapter">Operations</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Community Tourist Assistant Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/moderation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,57 @@
+Usability by User Type
+======================
+
+Guest Visitors
+--------------
+
+Primary goals:
+
+- Discover interesting local places quickly.
+- Compare quality and relevance.
+- Decide where to visit next.
+
+Current support:
+
+- Home page with top-rated and socially validated places.
+- Search filters (category, rating, images, open-now, sorting).
+- Rich place detail pages (photos, opening status, visitor essentials).
+
+Registered Contributors
+-----------------------
+
+Primary goals:
+
+- Add useful place entries and media.
+- Share reviews.
+- Build trust/recognition over time.
+
+Current support:
+
+- Guided add-place flow with optional advanced metadata.
+- Image previews before upload.
+- Contribution scoring and trust levels.
+- Clear submission states (pending/approved/rejected).
+
+Moderators / Admins
+-------------------
+
+Primary goals:
+
+- Keep content quality high with low operational effort.
+- Resolve reports quickly.
+- Maintain transparency and consistency.
+
+Current support:
+
+- Bulk moderation actions for places and reviews.
+- Dedicated review report handling paths.
+- Soft archive/restore instead of destructive delete.
+- Moderation audit logs for traceability.
+
+Accessibility and UX Principles
+-------------------------------
+
+- Keyboard-focus styling and skip links.
+- Semantic headings and form labels.
+- Clear status messaging for moderation and validation outcomes.
+- Mobile-responsive layout with Bootstrap components.

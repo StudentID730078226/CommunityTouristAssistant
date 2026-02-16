@@ -1,0 +1,48 @@
+Architecture
+============
+
+Overview
+--------
+
+The application is split into focused Django apps:
+
+- ``accounts``: authentication, profile, contribution scoring
+- ``places``: place models, submission/search/detail workflows
+- ``reviews``: review submission/reporting/moderation
+- ``community_tourism``: project-level routing and home views
+
+Layered Structure
+-----------------
+
+The codebase follows a practical layered approach:
+
+- **Presentation layer**: Django templates and view functions
+- **Application layer**: view orchestration, forms, moderation rules
+- **Domain layer**: models encapsulating key behavior (e.g., opening hours, trust logic)
+- **Data layer**: PostgreSQL persistence, indexes, migration-based schema evolution
+
+This separation keeps each area understandable and supports iterative MVP growth.
+
+Data Model Highlights
+---------------------
+
+- ``Place`` uses polymorphic inheritance for type-specific fields.
+- ``PlaceLike`` is an explicit model for flexible like metadata/analytics.
+- ``ReviewReport`` stores user reports with moderation status.
+- ``ModerationLog`` stores an audit trail for admin moderation actions.
+
+Key Relationships
+-----------------
+
+- A ``Place`` has many ``Review`` and ``PlaceImage`` entries.
+- A ``Place`` has many ``PlaceLike`` entries (explicit join model).
+- A ``Review`` can have many ``ReviewReport`` entries.
+- ``ModerationLog`` references moderated objects generically for a unified audit trail.
+
+Why this Architecture Fits the Scenario
+---------------------------------------
+
+- Supports public browsing and quick read performance (indexed queries).
+- Supports trusted crowd contribution with moderation checkpoints.
+- Supports low-overhead operations via admin actions and bulk moderation.
+- Supports future growth (new place subtypes, analytics, API layer) without redesign.

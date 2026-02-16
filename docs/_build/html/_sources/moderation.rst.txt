@@ -1,0 +1,25 @@
+Moderation Workflow
+===================
+
+Place Moderation
+----------------
+
+1. Users submit places in pending state.
+2. Admin approves/rejects/archives submissions.
+3. Actions are recorded in ``ModerationLog``.
+
+Review Moderation
+-----------------
+
+1. Users report reviews.
+2. Admin upholds or dismisses reports.
+3. Upheld reports can penalize contribution score and restrict posting.
+4. Actions are recorded in ``ModerationLog``.
+
+Soft Delete Strategy
+--------------------
+
+- ``Place`` and ``Review`` support archive fields.
+- Admin delete paths archive items instead of hard delete.
+- Archived content is excluded from public-facing queries.
+

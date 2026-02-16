@@ -1,0 +1,38 @@
+Features
+========
+
+Feature Objectives
+------------------
+
+The feature set is designed to satisfy five scenario outcomes:
+
+1. Public browsing and discovery
+2. Community ratings and reviews
+3. Registered user contributions
+4. Encouraging participation through progression
+5. Low-overhead moderation for administrators
+
+Core User Features
+------------------
+
+- Browse approved places and view details
+- Advanced search with filtering and sorting
+- Add places with type-specific attributes and image uploads
+- Add reviews and report inappropriate content
+- Like/unlike places
+
+Content Quality Features
+------------------------
+
+- Place submission moderation statuses
+- Review reporting queue and admin moderation actions
+- Contribution points and trust progression
+- Anti-spam protections (rate limiting, honeypot, CAPTCHA escalation, similarity checks)
+
+Data and Discovery Quality
+--------------------------
+
+- Rich place metadata (location, contact, visitor essentials)
+- Opening-hours model with open-now computation (where applicable)
+- Thumbnail-first result cards for quick scanning
+- Query annotations for like/review/rating context

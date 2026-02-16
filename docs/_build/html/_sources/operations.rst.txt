@@ -1,0 +1,31 @@
+Operations
+==========
+
+Environment
+-----------
+
+Runtime configuration is loaded from environment variables in ``.env``.
+
+Database
+--------
+
+Supported backends:
+
+- SQLite (default/dev)
+- PostgreSQL (recommended for production)
+
+Deployment Notes
+----------------
+
+- Keep secrets in environment variables.
+- Ensure media backup strategy is in place.
+- Run migrations on each deployment.
+
+Build Documentation
+-------------------
+
+From repository root:
+
+- HTML: ``sphinx-build -b html docs/sphinx/source docs/sphinx/_build/html``
+- PDF (rinoh): ``sphinx-build -b rinoh docs/sphinx/source docs/sphinx/_build/rinoh``
+

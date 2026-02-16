@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Community Tourist Assistant Docs &#8212; Community Tourist Assistant 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="community-tourist-assistant-docs">
+<h1>Community Tourist Assistant Docs<a class="headerlink" href="#community-tourist-assistant-docs" title="Link to this heading">¶</a></h1>
+<p>Welcome to the technical documentation for the Community Tourist Assistant project.</p>
+<p>This documentation explains how the platform supports a crowd-sourced tourism model
+with low staff overhead, high content quality controls, and user-friendly journeys
+for guests, contributors, and moderators.</p>
+<section id="project-context">
+<h2>Project Context<a class="headerlink" href="#project-context" title="Link to this heading">¶</a></h2>
+<p>Many communities depend on tourism but face staffing and budget constraints. This
+platform uses community-submitted place content, reviews, and moderation workflows
+to increase local discovery while keeping operational overhead manageable.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#layered-structure">Layered Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-model-highlights">Data Model Highlights</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#key-relationships">Key Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#why-this-architecture-fits-the-scenario">Why this Architecture Fits the Scenario</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns and Justifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html#polymorphic-model-pattern">Polymorphic Model Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html#repository-via-orm-query-composition">Repository via ORM + Query Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html#audit-trail-pattern">Audit Trail Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html#soft-delete-pattern">Soft Delete Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_patterns.html#progressive-trust-pattern">Progressive Trust Pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="features.html#feature-objectives">Feature Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#core-user-features">Core User Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#content-quality-features">Content Quality Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#data-and-discovery-quality">Data and Discovery Quality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usability_personas.html">Usability by User Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usability_personas.html#guest-visitors">Guest Visitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usability_personas.html#registered-contributors">Registered Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usability_personas.html#moderators-admins">Moderators / Admins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usability_personas.html#accessibility-and-ux-principles">Accessibility and UX Principles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moderation.html">Moderation Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moderation.html#place-moderation">Place Moderation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moderation.html#review-moderation">Review Moderation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moderation.html#soft-delete-strategy">Soft Delete Strategy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#environment">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#database">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#deployment-notes">Deployment Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.html#build-documentation">Build Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#local-setup-development">Local Setup (Development)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#postgresql-setup">PostgreSQL Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#static-and-media-files">Static and Media Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#production-deployment-gunicorn-nginx">Production Deployment (Gunicorn + Nginx)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#systemd-service">Systemd Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#nginx-configuration">Nginx Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#https-recommended">HTTPS (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html#operational-tasks">Operational Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-strategy">Test Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#current-status">Current Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-accounts.models">Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-places.models">Places</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-reviews.models">Reviews</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Community Tourist Assistant</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_patterns.html">Design Patterns and Justifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usability_personas.html">Usability by User Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moderation.html">Moderation Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operations.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="architecture.html" title="next chapter">Architecture</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Community Tourist Assistant Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

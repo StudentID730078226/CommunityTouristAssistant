@@ -1,0 +1,29 @@
+Community Tourist Assistant Docs
+================================
+
+Welcome to the technical documentation for the Community Tourist Assistant project.
+
+This documentation explains how the platform supports a crowd-sourced tourism model
+with low staff overhead, high content quality controls, and user-friendly journeys
+for guests, contributors, and moderators.
+
+Project Context
+---------------
+
+Many communities depend on tourism but face staffing and budget constraints. This
+platform uses community-submitted place content, reviews, and moderation workflows
+to increase local discovery while keeping operational overhead manageable.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   architecture
+   design_patterns
+   features
+   usability_personas
+   moderation
+   operations
+   deployment
+   testing
+   api

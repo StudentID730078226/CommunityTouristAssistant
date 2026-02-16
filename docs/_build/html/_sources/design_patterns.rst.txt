@@ -1,0 +1,58 @@
+Design Patterns and Justifications
+==================================
+
+Polymorphic Model Pattern
+-------------------------
+
+``Place`` is a polymorphic base model with subtype models such as ``HeritagePlace``,
+``FoodPlace``, ``ActivityPlace``, and ``BeachPlace``.
+
+Why used:
+
+- Shared fields stay centralized.
+- Type-specific fields stay clean and explicit.
+- UI can render subtype details without large conditional model structures.
+
+Repository via ORM + Query Composition
+--------------------------------------
+
+Django ORM querysets are composed in views for search, moderation queues, and detail pages.
+
+Why used:
+
+- Improves readability of filtering and sorting logic.
+- Allows incremental optimization via annotations and indexes.
+- Keeps SQL portability while still supporting query plan verification.
+
+Audit Trail Pattern
+-------------------
+
+``ModerationLog`` records moderation actions with actor, action type, target object, and timestamp.
+
+Why used:
+
+- Provides accountability for admin actions.
+- Supports governance/reporting requirements.
+- Helps explain content state changes during stakeholder demos.
+
+Soft Delete Pattern
+-------------------
+
+Places and reviews use archive fields instead of hard deletes.
+
+Why used:
+
+- Preserves moderation evidence.
+- Enables reversible operations (restore).
+- Reduces risk of accidental data loss.
+
+Progressive Trust Pattern
+-------------------------
+
+Contribution points and review restrictions provide graduated control.
+
+Why used:
+
+- Encourages healthy participation.
+- Adds non-binary moderation responses.
+- Scales better than manual intervention alone.
